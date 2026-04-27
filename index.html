@@ -1,0 +1,914 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;</p>
+<p class="p1">&lt;title&gt;Rubrik | Ransomware Readiness Assessment&lt;/title&gt;</p>
+<p class="p1">&lt;link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&amp;family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet"/&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--rubrik-blue: #00A3E0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--rubrik-dark: #0A0F1E;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--rubrik-navy: #0D1B3E;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--rubrik-mid: #112244;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--accent: #00D4FF;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--accent2: #FF6B35;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--green: #00E5A0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--yellow: #FFD600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--red: #FF3B5C;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--text: #E8F0FF;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--text-muted: #7B91B8;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--card-bg: rgba(17,34,68,0.7);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>--border: rgba(0,163,224,0.2);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>* { margin: 0; padding: 0; box-sizing: border-box; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--rubrik-dark);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Sans', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>overflow-x: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Animated background */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>body::before {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content: '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>inset: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background:</p>
+<p class="p1"><span class="Apple-converted-space">      </span>radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0,163,224,0.12) 0%, transparent 60%),</p>
+<p class="p1"><span class="Apple-converted-space">      </span>radial-gradient(ellipse 60% 50% at 80% 80%, rgba(0,212,255,0.08) 0%, transparent 50%),</p>
+<p class="p1"><span class="Apple-converted-space">      </span>radial-gradient(ellipse 40% 40% at 50% 50%, rgba(13,27,62,0.9) 0%, transparent 100%);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>pointer-events: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>z-index: 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Grid overlay */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>body::after {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content: '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>inset: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background-image:</p>
+<p class="p1"><span class="Apple-converted-space">      </span>linear-gradient(rgba(0,163,224,0.04) 1px, transparent 1px),</p>
+<p class="p1"><span class="Apple-converted-space">      </span>linear-gradient(90deg, rgba(0,163,224,0.04) 1px, transparent 1px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background-size: 60px 60px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>pointer-events: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>z-index: 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>z-index: 1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>max-width: 820px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 0 24px 80px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Header */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.header {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 28px 0 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 48px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.logo {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.logo-img {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 36px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: auto;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>filter: brightness(0) invert(1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.badge {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(0,163,224,0.15);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid rgba(0,163,224,0.3);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--rubrik-blue);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 5px 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.5px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Hero */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 52px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>animation: fadeUp 0.7s ease both;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero-eyebrow {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--rubrik-blue);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero-eyebrow::before,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero-eyebrow::after {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content: '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 32px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--rubrik-blue);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opacity: 0.5;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero h1 {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Syne', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: clamp(32px, 5vw, 52px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 800;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -1.5px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero h1 span {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: linear-gradient(90deg, var(--rubrik-blue), var(--accent));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>-webkit-background-clip: text;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>-webkit-text-fill-color: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background-clip: text;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hero p {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>max-width: 520px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.7;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 300;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Progress bar */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.progress-wrap {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 36px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>animation: fadeUp 0.7s 0.1s ease both;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.progress-info {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.progress-label {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.5px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.progress-count {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Syne', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--rubrik-blue);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.progress-bar-bg {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.07);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.progress-bar-fill {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: linear-gradient(90deg, var(--rubrik-blue), var(--accent));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: width 0.5s cubic-bezier(0.4,0,0.2,1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 0 12px rgba(0,163,224,0.5);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Question card */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.question-card {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--card-bg);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 36px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(16px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>animation: fadeUp 0.5s ease both;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.question-num {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--rubrik-blue);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.question-num::after {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content: '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.question-category {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(0,163,224,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid rgba(0,163,224,0.2);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 3px 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--rubrik-blue);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.3px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.question-text {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Syne', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.4;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 28px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.3px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Answer options */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.options {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.option {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: flex-start;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 16px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1.5px solid rgba(255,255,255,0.07);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: all 0.2s ease;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.02);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.option::before {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content: '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>inset: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: linear-gradient(90deg, rgba(0,163,224,0.08), transparent);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: opacity 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.option:hover {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-color: rgba(0,163,224,0.4);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(0,163,224,0.05);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transform: translateX(4px);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.option:hover::before { opacity: 1; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.option.selected {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-color: var(--rubrik-blue);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(0,163,224,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.option.selected::before { opacity: 1; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.option-radio {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 2px solid rgba(255,255,255,0.2);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: all 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.option.selected .option-radio {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-color: var(--rubrik-blue);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--rubrik-blue);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 0 12px rgba(0,163,224,0.5);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.option.selected .option-radio::after {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content: '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.option-content { flex: 1; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.option-label {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.4;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 2px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.option-desc {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 300;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.4;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Navigation */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.nav {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>animation: fadeUp 0.5s 0.1s ease both;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 13px 28px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Sans', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: all 0.2s ease;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-decoration: none;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-primary {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: linear-gradient(135deg, var(--rubrik-blue), #0080B8);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 4px 20px rgba(0,163,224,0.35);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-primary:hover {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transform: translateY(-2px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 8px 28px rgba(0,163,224,0.45);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: linear-gradient(135deg, #10B3F0, var(--rubrik-blue));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-primary:disabled {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>opacity: 0.35;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cursor: not-allowed;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transform: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: none;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-ghost {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1.5px solid rgba(255,255,255,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-ghost:hover {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-color: rgba(255,255,255,0.2);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.04);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Input field for name/company */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.input-group {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.input-label {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.input-field {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.04);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1.5px solid rgba(255,255,255,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 13px 18px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Sans', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: all 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.input-field::placeholder { color: rgba(255,255,255,0.2); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.input-field:focus {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-color: var(--rubrik-blue);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(0,163,224,0.05);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 0 0 3px rgba(0,163,224,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.input-row {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: 1fr 1fr;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Results */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.results {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>animation: fadeUp 0.7s ease both;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-hero {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--card-bg);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 44px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(16px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 8px 40px rgba(0,0,0,0.3);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-hero::before {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>content: '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>top: -60%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 400px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 400px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: radial-gradient(circle, rgba(0,163,224,0.12) 0%, transparent 70%);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>pointer-events: none;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-label {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-ring {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 160px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 160px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin: 0 auto 24px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-ring svg {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transform: rotate(-90deg);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-ring-bg {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fill: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>stroke: rgba(255,255,255,0.07);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>stroke-width: 8;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-ring-fill {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>fill: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>stroke-width: 8;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>stroke-linecap: round;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: stroke-dashoffset 1.5s cubic-bezier(0.4,0,0.2,1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-number {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>top: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>left: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transform: translate(-50%, -50%);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-value {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Syne', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 42px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 800;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -2px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-max {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-tier {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Syne', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 26px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.5px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.score-desc {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>max-width: 480px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.7;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 300;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Category breakdown */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.breakdown-grid {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: 1fr 1fr;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.breakdown-card {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--card-bg);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: transform 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.breakdown-card:hover { transform: translateY(-2px); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.breakdown-header {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.breakdown-cat {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.3px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.breakdown-score {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Syne', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.breakdown-bar-bg {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.07);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.breakdown-bar-fill {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: width 1.2s cubic-bezier(0.4,0,0.2,1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.breakdown-icon { font-size: 20px; margin-bottom: 8px; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Findings */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.findings-section {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--card-bg);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 32px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.section-title {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Syne', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.3px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.finding-item {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 18px 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid rgba(255,255,255,0.05);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.finding-item:last-child { border-bottom: none; padding-bottom: 0; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.finding-dot {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.finding-title {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.finding-text {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 300;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Rubrik solutions */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.solutions-grid {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.solution-card {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(0,163,224,0.05);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid rgba(0,163,224,0.2);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: flex-start;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: all 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cursor: default;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.solution-card:hover {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(0,163,224,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-color: rgba(0,163,224,0.35);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transform: translateX(4px);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.solution-icon {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 42px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 42px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: linear-gradient(135deg, rgba(0,163,224,0.2), rgba(0,212,255,0.1));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid rgba(0,163,224,0.3);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.solution-name {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.solution-desc {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 300;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.solution-tag {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 2px 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.5px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tag-critical { background: rgba(255,59,92,0.15); color: var(--red); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tag-recommended { background: rgba(255,214,0,0.15); color: var(--yellow); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.tag-enhance { background: rgba(0,229,160,0.15); color: var(--green); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* CTA footer */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.cta-footer {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: linear-gradient(135deg, rgba(0,163,224,0.15), rgba(0,212,255,0.08));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid rgba(0,163,224,0.25);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 36px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 4px 30px rgba(0,163,224,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.cta-footer h3 {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Syne', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 22px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.5px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.cta-footer p {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>max-width: 420px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-left: auto;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-right: auto;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.7;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 300;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.cta-buttons {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-outline {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--rubrik-blue);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1.5px solid rgba(0,163,224,0.4);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.btn-outline:hover {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(0,163,224,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-color: var(--rubrik-blue);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transform: translateY(-2px);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Print button */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.print-btn {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.05);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid rgba(255,255,255,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 10px 18px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'DM Sans', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>transition: all 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.print-btn:hover {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(255,255,255,0.08);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.result-header-actions {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 28px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Animations */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>@keyframes fadeUp {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>from { opacity: 0; transform: translateY(20px); }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>to { opacity: 1; transform: translateY(0); }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>/* Welcome screen */</p>
+<p class="p1"><span class="Apple-converted-space">  </span>.welcome {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 20px 0 40px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>animation: fadeUp 0.7s ease both;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.welcome-features {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: repeat(3, 1fr);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin: 36px 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.feature-card {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>background: var(--card-bg);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>padding: 24px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.feature-icon {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 28px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.feature-title {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Syne', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.feature-desc {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.5;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 300;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>@media (max-width: 600px) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.breakdown-grid { grid-template-columns: 1fr; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.welcome-features { grid-template-columns: 1fr; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.input-row { grid-template-columns: 1fr; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.question-card { padding: 24px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.hidden { display: none !important; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.loading {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>.spinner {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>width: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>height: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border: 2px solid rgba(255,255,255,0.3);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-top-color: white;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>animation: spin 0.7s linear infinite;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>@keyframes spin { to { transform: rotate(360deg); } }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>@media print {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>* { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body { background: #0A0F1E !important; color: #E8F0FF !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body::before, body::after { display: none !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.container { max-width: 100% !important; padding: 0 20px 20px !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#screen-welcome, #screen-questions, #screen-loading,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.print-btn, .result-header-actions .print-btn,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.cta-footer .btn-primary, .cta-footer .btn-outline,</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#screen-results &gt; div:last-child { display: none !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#screen-results { display: block !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.score-hero { background: #0D1B3E !important; border: 1px solid rgba(0,163,224,0.4) !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.breakdown-card { background: #0D1B3E !important; border: 1px solid rgba(0,163,224,0.3) !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.findings-section { background: #0D1B3E !important; border: 1px solid rgba(0,163,224,0.3) !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.solution-card { background: rgba(0,163,224,0.08) !important; border: 1px solid rgba(0,163,224,0.25) !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.cta-footer { background: rgba(0,163,224,0.1) !important; border: 1px solid rgba(0,163,224,0.3) !important; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="container"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Header --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="logo"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;img class="logo-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4YAAAO9CAYAAADeznljAAAAAXNSR0IArs4c6QAAAIRlWElmTU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAA4agAwAEAAAAAQAAA70AAAAAKSMNhwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABxpRE9UAAAAAgAAAAAAAAHfAAAAKAAAAd8AAAHeAABSlqpC+6wAAEAASURBVHgB7N2Nddw4tjDaDkEhKASHoBAcAkJwCArBITCEDgEhKASFoAzeO7hufWPLUhV/QQDcWAsjqYoEDzYOCZ7uO3P/+UcjQIAAAQLXE3iIKX+P/vyhp/j7MbpGgAABAgQIECBAgAABAoMKPMW8/o3+/93pL/F9iq4RIECAAAECBAgQIECAwCAC5d8QzikIPxaMpUD8NoiBaRAgQIAAAQIECBAgQOCyAqWwe4v+seib+3c5N0XXCBAgQIAAAQIECBAgQKBDga1F4e/FY+pw/kImQIAAAQIECBAgQIDApQX2LArfC8R0aVGTJ0CAAAECBAgQIECAQEcCRxSFisOOEkCoBAgQIECAAAECBAhcW+DIolBxeO3cMnsCBAgQIECAAAECBDoQqFEUKg47SAQhEiBAgAABAgQIECBwTYGaRaHi8Ho5ZtYECBAgQIAAAQIECDQscEZRqDhsOCGERoAAAQIECBAgQIDAtQTOLAoVh9fKNbMlQIAAAQIECBAgQKBBgRaKQsVhg4khJAIECBAgQIAAAQIEriHQUlGoOLxGzpklAQIECBAgQIAAAQINCbRYFCoOG0oQoRAgQIAAAQIECBBoSeAhgvke/fm3/iN+f4yurRNouShUHK5b09/PKvdMiv78Wy9/P0bXCBAgQIAAAQIECHQlUIqXKfp7ofDZz/J9eQnW5gv0UBS+r3WaPy1H/ifwHD/f/T77meP7p+gaAQIECBAgQIAAgaYFniK6HP2zl9rPPnuJYxWHgTCj9VQUvq91mjEvh/wS+Dd+vLvd+5nj2BRdI0CAAAECBAgQINCUwFNEk6Pfe6H97PvyQqzdFuixKHxf63R7ar4Ngefo715Lfr7GeSm6RoAAAQIECBAgQOBUgRRXf42+5GX2s2OfYgztc4Gei8L3tU6fT82nIfAQ/S36u9Wan69xfopextIIECBAgAABAgQIVBNIcaXX6GteYj87Z4qxtL8FRigK39c7/T09n4TAj+jvRlt/lgLzOboCMRA0AgQIECBAgACBYwTKy+Zz9NfoW19gP57/EmNqfwp8iz/fon+06vnv9OcU/RUC/0bfe01L3jxHf4iuESBAgAABAgQIENhFoLxcPkcvL5t7v8D+Pl4Mr/0n8C1+Hu39u33N35NV/kMgx19H+k8x/mN0jQABAgQIECBAgMAqgcc462f0WgWKqiAHPGnkovC9AEoDrtvaKeU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7n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45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265Y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14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBj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XOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEgQIAAAQIECBD4P4Gn+M8cveZL6WfXihAu265YFL7nQLrsqv+aeI4f7+ZN/iR/reU48d3lyJ9TXOcxukaAAAECBAgQIEBglsBjHDVFP/Il9bOx45KXb1coCt/XPl1+tX8B5PjxblLjZ7neU3SNAAECBAgQIECAwKcCT/HpFL3Gy+ln14hLX7pdqSh8X/906RX/NfkcP949av4s132KrhEg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</p>
+</body>
+</html>
